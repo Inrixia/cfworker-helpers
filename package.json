@@ -1,0 +1,27 @@
+{
+	"name": "@inrixia/cfworker-helpers",
+	"version": "1.0.0",
+	"description": "Helpers used across various cloudflare worker projects",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Inrixia/cfworker-helpers.git"
+	},
+	"main": "dist/index.js",
+	"author": "@Inrixia",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Inrixia/cfworker-helpers/issues"
+	},
+	"scripts": {
+		"postinstall": "tsc"
+	},
+	"homepage": "https://github.com/Inrixia/cfworker-helpers#readme",
+	"dependencies": {
+		"@inrixia/helpers": "^1.23.3",
+		"typescript": "^4.7.3"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^3.11.0",
+		"@types/node": "^17.0.40"
+	}
+}
