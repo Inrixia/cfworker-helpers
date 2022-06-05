@@ -19,17 +19,14 @@ export const responses = {
 	...okResps,
 };
 
-type EnvInterface = { dev?: string };
-
 type ErrRespBody = ValueOf<ErrResps>;
 type OkRespBody = ValueOf<OkResps>;
-export function genericResponse<T extends OkRespBody = OkRespBody>(status: T["code"], env?: EnvInterface): Response;
-export function genericResponse<T extends ErrRespBody = ErrRespBody>(status: T["code"], env?: EnvInterface, err?: Error): Response;
-export function genericResponse<T extends OkRespBody | ErrRespBody = OkRespBody | ErrRespBody>(status: T["code"], env?: EnvInterface, err?: Error): Response {
+export function genericResponse<T extends OkRespBody = OkRespBody>(status: T["code"]): Response;
+export function genericResponse<T extends ErrRespBody = ErrRespBody>(status: T["code"], err?: Error): Response;
+export function genericResponse<T extends OkRespBody | ErrRespBody = OkRespBody | ErrRespBody>(status: T["code"], err?: Error): Response {
 	let respDetails: ResponseError = {};
 	if (err !== undefined) {
 		respDetails.err = err.message;
-		// if (env?.ENVIRONMENT === "dev")
 		if (err.stack) respDetails.stack = err.stack.toString();
 	}
 	const response = {
