@@ -1,27 +1,27 @@
 export const errResps = {
 	400: {
 		code: 400,
-		err: "Bad Request",
+		desc: "Bad Request",
 	},
 	415: {
 		code: 415,
-		err: "Unsupported Media Type",
+		desc: "Unsupported Media Type",
 	},
 	404: {
 		code: 404,
-		err: "Endpoint Not Found",
+		desc: "Endpoint Not Found",
 	},
 	401: {
 		code: 401,
-		err: "Unauthorized",
+		desc: "Unauthorized",
 	},
 	405: {
 		code: 405,
-		err: "Method Not Allowed",
+		desc: "Method Not Allowed",
 	},
 	500: {
 		code: 500,
-		err: "An Arror Occurred",
+		desc: "An Error Occurred",
 	},
 } as const;
 export type ErrResps = typeof errResps;
@@ -53,11 +53,8 @@ export type OkResponseCode = keyof OkResps;
 export type ErrResponseCode = keyof ErrResps;
 
 type ErrRespsDev = {
-	[C in ErrResponseCode]: {
-		desc: ErrResps[C]["err"];
-		code: C;
-	} & ResponseError;
+	[C in ErrResponseCode]: ErrResps[C];
 };
 
-export type ErrResp<C extends keyof ErrRespsDev = never> = ErrRespsDev[500] | ErrRespsDev[C];
+export type ErrResp<C extends keyof ErrRespsDev> = ErrRespsDev[C];
 export type OkResp<C extends keyof OkResps = never> = OkResps[C];
