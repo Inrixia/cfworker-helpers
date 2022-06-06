@@ -56,5 +56,9 @@ type ErrRespsDev = {
 	[C in ErrResponseCode]: ErrResps[C];
 };
 
+type OkRespsDev = {
+	[C in OkResponseCode]: OkResps[C];
+};
+
 export type ErrResp<C extends keyof ErrRespsDev> = ErrRespsDev[C];
-export type OkResp<C extends keyof OkResps = never> = OkResps[C];
+export type OkResp<C extends keyof OkResps> = OkRespsDev[C];
