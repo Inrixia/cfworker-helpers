@@ -6,7 +6,17 @@
 		"type": "git",
 		"url": "git+https://github.com/Inrixia/cfworker-helpers.git"
 	},
-	"main": "dist/index.js",
+	"exports": {
+		".": "./dist/index.js",
+		"./*": "./dist/*.js"
+	},
+	"typesVersions": {
+		"*": {
+			"*": [
+				"dist/*"
+			]
+		}
+	},
 	"author": "@Inrixia",
 	"license": "ISC",
 	"bugs": {
