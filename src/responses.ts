@@ -72,3 +72,8 @@ export const OPTIONS = (request: Request) => {
 		});
 	}
 };
+
+export const parryResponse = async (response: Promise<Response>): Promise<Response> => {
+	const res = await response;
+	return new Response(res.body, { headers: res.headers, status: res.status });
+};
