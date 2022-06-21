@@ -10,10 +10,16 @@ type RateLimitType = {
 
 export const fetchWithTimeout = async (...args: Parameters<FetchType>): ReturnType<FetchType> => {
 	const response = await fetch(...args);
-	const { retry_after } = await response.clone().json<RateLimitType>();
-	if (retry_after !== undefined) {
-		await sleep(retry_after * 1000);
-		return fetchWithTimeout(...args);
+	const clonedResponse = response.clone();
+	try {
+		const { retry_after } = await clonedResponse.json<RateLimitType>();
+		if (retry_after !== undefined) {
+			await sleep(retry_after * 1000);
+			return fetchWithTimeout(...args);
+		}
+		return response;
+	} catch (err) {
+		const { message, stack } = <Error>err;
+		throw new Error(`${message}\n${stack}\nResponseBody: ${await clonedResponse.text()}`);
 	}
-	return response;
 };
