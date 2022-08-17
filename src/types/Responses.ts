@@ -23,6 +23,10 @@ export const errResps = {
 		code: 500,
 		desc: "An Error Occurred",
 	},
+	403: {
+		code: 403,
+		desc: "Forbidden",
+	},
 } as const;
 export type ErrResps = typeof errResps;
 
