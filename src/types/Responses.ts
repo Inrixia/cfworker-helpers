@@ -51,7 +51,7 @@ export type ResponseError = {
 	stack?: string;
 };
 
-export type CachedResponse<T> = (T & { __cached: boolean; err?: undefined }) | { err: string };
+export type CachedResponse<T> = { cached: boolean; _: T; err?: undefined } | { err: string };
 
 export type OkResponseCode = keyof OkResps;
 export type ErrResponseCode = keyof ErrResps;
