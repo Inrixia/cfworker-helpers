@@ -48,7 +48,9 @@ export const jsonResponse = <T = unknown>(o: T, init?: ResponseInit & { headers?
 };
 
 export const patchResponse = (response: Response) => {
-	for (const header of Object.entries(corsHeaders)) response.headers.set(header[0], header[1]);
+	try {
+		for (const header of Object.entries(corsHeaders)) response.headers.set(header[0], header[1]);
+	} catch (err) {}
 	return response;
 };
 
