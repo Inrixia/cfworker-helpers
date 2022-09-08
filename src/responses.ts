@@ -25,10 +25,9 @@ export function genericResponse<T extends OkRespBody = OkRespBody>(status: T["co
 export function genericResponse<T extends ErrRespBody = ErrRespBody>(status: T["code"], err?: Error): Response;
 export function genericResponse<T extends OkRespBody | ErrRespBody = OkRespBody | ErrRespBody>(status: T["code"], err?: Error): Response {
 	let respDetails: ResponseError = {};
-	if (err !== undefined) {
-		respDetails.err = err.message;
-		if (err.stack) respDetails.stack = err.stack.toString();
-	}
+	if (err?.message !== undefined) respDetails.err = err.message;
+	if (err?.stack !== undefined) respDetails.stack = err.stack.toString();
+
 	const response = {
 		...responses[status as keyof (ErrResps & OkResps)],
 		...respDetails,
